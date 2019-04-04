@@ -1,0 +1,68 @@
+﻿@model CinemaFlixManager.Models.ShowTimeViewModel.AddShowTimeViewModel
+
+@{
+    ViewData["Title"] = "AddShowTimes";
+}
+<link href="~/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/AdminLTE/bower_components/select2/dist/css/select2.min.css">
+<br />
+<h4>Add ShowTimes</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddShowTimes">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CinemaId" class="control-label"></label>
+                <select asp-for="CinemaId" class="form-control select2" multiple="multiple" data-placeholder="Select a State" asp-items="ViewBag.CinemaId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MovieId" class="control-label"></label>
+                <select asp-for="MovieId" class="form-control" asp-items="ViewBag.MovieId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShowingDates" class="control-label"></label>
+                <input id="reservation" asp-for="ShowingDates" class="form-control" />
+                <span asp-validation-for="ShowingDates" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShowingTimes" class="control-label"></label>
+                <input data-role="tagsinput" asp-for="ShowingTimes" class="form-control" />
+                <span asp-validation-for="ShowingTimes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<div class="form-group">
+    <label>Multiple</label>
+    <select class="form-control select2" multiple="multiple" data-placeholder="Select a State"
+            style="width: 100%;">
+        <option>Alabama</option>
+        <option>Alaska</option>
+        <option>California</option>
+        <option>Delaware</option>
+        <option>Tennessee</option>
+        <option>Texas</option>
+        <option>Washington</option>
+    </select>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @*<script src="~/moment/min/moment.min.js"></script>*@
+    @*<script src="~/bootstrap-daterangepicker/daterangepicker.js"></script>*@
+    <script src="~/AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
+    @*<script src="~/Tags-input/tagsinput.js"></script>*@
+    <script>
+        //$('#reservation').daterangepicker()
+        $('.select2').select2()
+
+    </script>
+}
+

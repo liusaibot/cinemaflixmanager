@@ -1,0 +1,10 @@
+﻿@model IEnumerable<CinemaFlixManager.Models.Movie>
+
+
+
+@foreach (var item in Model) {
+
+<div class="external-event bg-@item.TagColour" data-item-duration="@item.Duration" data-item-title="@item.Title">@Html.DisplayFor(modelItem => item.Title)</div>
+        
+}
+

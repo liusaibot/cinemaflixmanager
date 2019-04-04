@@ -1,0 +1,58 @@
+﻿@model CinemaFlixManager.Models.Cinema
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LogoPath" class="control-label"></label>
+                <input asp-for="LogoPath" class="form-control" />
+                <span asp-validation-for="LogoPath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WebsiteUrl" class="control-label"></label>
+                <input asp-for="WebsiteUrl" class="form-control" />
+                <span asp-validation-for="WebsiteUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                    <input asp-for="IsActive" type="checkbox" class="custom-control-input" id="customCheck1">
+                    <label asp-for="IsActive" class="custom-control-label" for="customCheck1">Is Cinema Active?</label>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                </div>
+                @*<label asp-for="IsActive" class="control-label custom-control-label"></label>
+        <input asp-for="IsActive" type="checkbox" class="form-control custom-control-input" />*@
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CinemaStatesId" class="control-label"></label>
+                <select asp-for="CinemaStatesId" class="form-control" asp-items="ViewBag.CinemaStatesId"></select>
+                <span asp-validation-for="CinemaStatesId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

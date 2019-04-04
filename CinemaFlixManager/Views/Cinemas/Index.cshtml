@@ -1,0 +1,97 @@
+﻿@model IEnumerable<CinemaFlixManager.Models.Cinema>
+
+
+@{
+    ViewData["Title"] = "Index";
+    ViewData["Heading"] = "Cinemas";
+}
+<style>
+    .row.display-flex {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .thumbnail {
+        height: 100%;
+    }
+</style>
+
+
+<p class="pull-right">
+    <button class="btn btn-success" data-toggle="modal" data-target="#modal-create">Create New</button>
+</p>
+<br />
+<hr />
+
+<!--Details-->
+<div class="modal fade" id="modal-create">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add New Cinema</h4>
+            </div>
+            <div class="modal-body">
+                @*<p>One fine body&hellip;</p>*@
+                @*@Html.Partial("Create")*@
+                @await Html.PartialAsync("Create", @ViewData["Cinema"])
+            </div>
+            @*<div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>*@
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div id="cinemasDiv" data-url='@Url.Action("List")'>
+    @Html.Partial("_List", Model)
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '#cinema-list .change-active-status', function () {
+            //$("#cinema-list .change-active-status").on("click", function (e) {
+                $.ajax({
+                    url: "Cinemas/ChangeStatus/" + $(this).attr("data-cinema-id"),
+                    method: "PUT",
+                    success: function () {
+                        console.log("success");
+                        //var cinemasDiv = $('#cinemasDiv'),
+                        //    url = $(this).data('url');
+
+                        //$.get(url, function (data) {
+                        //    cinemasDiv.html(data);
+                        //});
+                        $('#cinemasDiv').load('@Url.Action("List","Cinemas")');
+                        //e.preventDefault();
+                    },
+                })
+                console.log("You clicked me");
+            });
+            $(document).on('click', '#cinema-list .remove-cinema', function () {
+            //$("#cinema-list .change-active-status").on("click", function (e) {
+             console.log("Delete Clicked");
+                $.ajax({
+                    url: "Cinemas/Delete/" + $(this).attr("data-cinema-id"),
+                    method: "DELETE",
+                    success: function () {
+                        console.log("deleted");
+                        $('#cinemasDiv').load('@Url.Action("List","Cinemas")');
+                        //e.preventDefault();
+                    },
+                })
+                console.log("You clicked me");
+            });
+
+        })
+    </script>
+
+}
+<!-- /.modal -->

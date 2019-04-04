@@ -15,6 +15,16 @@ namespace CinemaFlixManager.Data
         {
         }
 
+        public DbSet<Movie> Movies { get; set; }
+
+        public DbSet<Cinema> Cinemas { get; set; }
+
+        public DbSet<Genre> Genres { get; set; }
+
+        public DbSet<CinemaStates> CinemaStates { get; set; }
+
+        public DbSet<MovieShowings> MovieShowings { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
